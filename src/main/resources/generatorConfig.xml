@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <!-- 数据库驱动包位置，此处根据驱动包实际路径配置 -->
+  <classPathEntry location="D:\mvn_repository\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar" />
+  
+  <context id="context1">
+  
+  	<!-- 注释 -->  
+    <commentGenerator >
+        <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+        <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+    </commentGenerator>
+  
+  	<!-- 数据库连接相关 -->
+    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/cashier_manager" driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+    
+    <!-- 类型转换 -->
+    <javaTypeResolver >  
+        <property name="forceBigDecimals" value="false" />  
+    </javaTypeResolver>
+    
+    <!-- 生成实体类路径 -->
+    <javaModelGenerator targetPackage="com.cm.entity" targetProject="cashier-manager\src\main\java" />
+    
+    <!-- 生成mapxml路径 -->
+    <sqlMapGenerator targetPackage="mybatis" targetProject="cashier-manager/src/main/resources" />
+    
+    <!-- 生成dao接口路径 -->
+    <javaClientGenerator targetPackage="com.cm.dao" targetProject="cashier-manager/src/main/java" type="XMLMAPPER" />
+    
+    <!-- 配置表信息 -->
+    <!-- tableName表名，domainObjectName实体类名 -->
+    <table tableName="cm_user" domainObjectName="CmUser" 
+      enableSelectByExample="false"
+      enableDeleteByExample="false"
+      enableCountByExample="false" 
+      selectByExampleQueryId="false"
+      enableUpdateByExample="false">
+      <!-- 指定列的java数据类型 -->
+      <generatedKey column="id" sqlStatement="MySql" identity="true" />
+<!--       <columnOverride column="id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+      <!-- 如果有多个字段，可以继续增加 -->
+<!--       <columnOverride column="condo_building_id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+	</table>
+  </context>
+</generatorConfiguration>
