@@ -29,7 +29,7 @@ public class ExampleController {
 		//cmUserService.suUser();
 		CmUser u = cmUserService.selectByPrimaryKey(2L);
 		logger.debug("----loginName: " + u.getLoginName());
-		return "ttt";
+		return u.getLoginName();
 		
 	}
 
