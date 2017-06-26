@@ -29,7 +29,6 @@ public class SpringBootApp {
 		sqlSessionFactoryBean.setDataSource(dataSource());
 
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-
 		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
 
 		return sqlSessionFactoryBean.getObject();
