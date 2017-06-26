@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cm.entity.CmUser;
 import com.cm.service.CmUserService;
+import com.github.pagehelper.Page;
 
 @RestController
 public class ExampleController {
@@ -25,10 +26,15 @@ public class ExampleController {
 	}
 
 	@RequestMapping("/test")
-	public String test() {
+	public String test(Page<CmUser> page) {
 		//cmUserService.suUser();
 		CmUser u = cmUserService.selectByPrimaryKey(2L);
 		logger.debug("----loginName: " + u.getLoginName());
+		
+		page.setPageSize(2);
+		Page<CmUser> l = cmUserService.findPageList(new CmUser(), page);
+		logger.debug("-----size:  "+l.size());
+		logger.debug("-----total size:  "+l.getTotal());
 		return u.getLoginName();
 		
 	}
