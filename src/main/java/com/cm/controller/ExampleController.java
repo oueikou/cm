@@ -1,6 +1,7 @@
 package com.cm.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.annotation.Resource;
 
@@ -28,7 +29,7 @@ public class ExampleController extends BaseController {
 	}
 
 	@RequestMapping("/test")
-	public String test(Page<CmUser> page, Date d) {
+	public String test(Page<CmUser> page) {
 		// cmUserService.suUser();
 		CmUser u = cmUserService.selectByPrimaryKey(2L);
 		logger.debug("----loginName: " + u.getLoginName());
@@ -37,7 +38,7 @@ public class ExampleController extends BaseController {
 		Page<CmUser> l = cmUserService.findPageList(new CmUser(), page);
 		logger.debug("-----size:  " + l.size());
 		logger.debug("-----total size:  " + l.getTotal());
-		logger.debug("-----日期:  " + d.toLocaleString());
+		logger.debug("-----日期:  " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		return u.getLoginName();
 
 	}
