@@ -42,5 +42,11 @@ public class ExampleController extends BaseController {
 		return u.getLoginName();
 
 	}
+	
+	@RequestMapping("/testInser")
+	public CmUser testUserInsert(CmUser cmUser){
+		cmUserService.insert(cmUser);
+		return cmUser;
+	}
 
 }
