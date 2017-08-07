@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.dao.CmServiceTicketDao">
+  <resultMap id="BaseResultMap" type="com.cm.entity.CmServiceTicket">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="service_ticket_no" jdbcType="VARCHAR" property="serviceTicketNo" />
+    <result column="service_ticket_status" jdbcType="INTEGER" property="serviceTicketStatus" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_user" jdbcType="BIGINT" property="modifyUser" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, service_ticket_no, service_ticket_status, create_user, create_time, modify_user, 
+    modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_service_ticket
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cm_service_ticket
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cm.entity.CmServiceTicket">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cm_service_ticket (service_ticket_no, service_ticket_status, 
+      create_user, create_time, modify_user, 
+      modify_time)
+    values (#{serviceTicketNo,jdbcType=VARCHAR}, #{serviceTicketStatus,jdbcType=INTEGER}, 
+      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cm.entity.CmServiceTicket">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cm_service_ticket
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceTicketNo != null">
+        service_ticket_no,
+      </if>
+      <if test="serviceTicketStatus != null">
+        service_ticket_status,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyUser != null">
+        modify_user,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceTicketNo != null">
+        #{serviceTicketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceTicketStatus != null">
+        #{serviceTicketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cm.entity.CmServiceTicket">
+    update cm_service_ticket
+    <set>
+      <if test="serviceTicketNo != null">
+        service_ticket_no = #{serviceTicketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceTicketStatus != null">
+        service_ticket_status = #{serviceTicketStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cm.entity.CmServiceTicket">
+    update cm_service_ticket
+    set service_ticket_no = #{serviceTicketNo,jdbcType=VARCHAR},
+      service_ticket_status = #{serviceTicketStatus,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.dao.CmFoodDao">
+  <resultMap id="BaseResultMap" type="com.cm.entity.CmFood">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="food_name" jdbcType="VARCHAR" property="foodName" />
+    <result column="food_cost" jdbcType="DECIMAL" property="foodCost" />
+    <result column="food_price" jdbcType="DECIMAL" property="foodPrice" />
+    <result column="food_unit" jdbcType="VARCHAR" property="foodUnit" />
+    <result column="food_photo" jdbcType="VARCHAR" property="foodPhoto" />
+    <result column="food_introduction" jdbcType="VARCHAR" property="foodIntroduction" />
+    <result column="is_marketable" jdbcType="BIT" property="isMarketable" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_user" jdbcType="BIGINT" property="modifyUser" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, food_name, food_cost, food_price, food_unit, food_photo, food_introduction, is_marketable, 
+    category_id, create_user, create_time, modify_user, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_food
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cm_food
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cm.entity.CmFood">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cm_food (food_name, food_cost, food_price, 
+      food_unit, food_photo, food_introduction, 
+      is_marketable, category_id, create_user, 
+      create_time, modify_user, modify_time
+      )
+    values (#{foodName,jdbcType=VARCHAR}, #{foodCost,jdbcType=DECIMAL}, #{foodPrice,jdbcType=DECIMAL}, 
+      #{foodUnit,jdbcType=VARCHAR}, #{foodPhoto,jdbcType=VARCHAR}, #{foodIntroduction,jdbcType=VARCHAR}, 
+      #{isMarketable,jdbcType=BIT}, #{categoryId,jdbcType=BIGINT}, #{createUser,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cm.entity.CmFood">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cm_food
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="foodName != null">
+        food_name,
+      </if>
+      <if test="foodCost != null">
+        food_cost,
+      </if>
+      <if test="foodPrice != null">
+        food_price,
+      </if>
+      <if test="foodUnit != null">
+        food_unit,
+      </if>
+      <if test="foodPhoto != null">
+        food_photo,
+      </if>
+      <if test="foodIntroduction != null">
+        food_introduction,
+      </if>
+      <if test="isMarketable != null">
+        is_marketable,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyUser != null">
+        modify_user,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="foodName != null">
+        #{foodName,jdbcType=VARCHAR},
+      </if>
+      <if test="foodCost != null">
+        #{foodCost,jdbcType=DECIMAL},
+      </if>
+      <if test="foodPrice != null">
+        #{foodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="foodUnit != null">
+        #{foodUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="foodPhoto != null">
+        #{foodPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="foodIntroduction != null">
+        #{foodIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="isMarketable != null">
+        #{isMarketable,jdbcType=BIT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cm.entity.CmFood">
+    update cm_food
+    <set>
+      <if test="foodName != null">
+        food_name = #{foodName,jdbcType=VARCHAR},
+      </if>
+      <if test="foodCost != null">
+        food_cost = #{foodCost,jdbcType=DECIMAL},
+      </if>
+      <if test="foodPrice != null">
+        food_price = #{foodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="foodUnit != null">
+        food_unit = #{foodUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="foodPhoto != null">
+        food_photo = #{foodPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="foodIntroduction != null">
+        food_introduction = #{foodIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="isMarketable != null">
+        is_marketable = #{isMarketable,jdbcType=BIT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cm.entity.CmFood">
+    update cm_food
+    set food_name = #{foodName,jdbcType=VARCHAR},
+      food_cost = #{foodCost,jdbcType=DECIMAL},
+      food_price = #{foodPrice,jdbcType=DECIMAL},
+      food_unit = #{foodUnit,jdbcType=VARCHAR},
+      food_photo = #{foodPhoto,jdbcType=VARCHAR},
+      food_introduction = #{foodIntroduction,jdbcType=VARCHAR},
+      is_marketable = #{isMarketable,jdbcType=BIT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
