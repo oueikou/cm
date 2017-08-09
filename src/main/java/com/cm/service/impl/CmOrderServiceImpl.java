@@ -14,7 +14,7 @@ public class CmOrderServiceImpl extends BaseServiceImpl<CmOrder, Long> implement
 	private CmOrderDao cmOrderDao;
 
 	@Autowired
-	public void setBaseDao() {
+	public void setBaseDao(CmOrderDao cmOrderDao) {
 		super.setBaseDao(cmOrderDao);
 	}
 

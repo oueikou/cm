@@ -14,7 +14,7 @@ public class CmCategoryServiceImpl extends BaseServiceImpl<CmCategory, Long> imp
 	private CmCategoryDao cmCategoryDao;
 
 	@Autowired
-	public void setBaseDao() {
+	public void setBaseDao(CmCategoryDao cmCategoryDao) {
 		super.setBaseDao(cmCategoryDao);
 	}
 

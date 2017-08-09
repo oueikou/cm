@@ -14,7 +14,7 @@ public class CmFoodServiceImpl extends BaseServiceImpl<CmFood, Long> implements 
 	private CmFoodDao cmFoodDao;
 
 	@Autowired
-	public void setBaseDao() {
+	public void setBaseDao(CmFoodDao cmFoodDao) {
 		super.setBaseDao(cmFoodDao);
 	}
 

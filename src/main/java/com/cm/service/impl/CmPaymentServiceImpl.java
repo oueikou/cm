@@ -14,7 +14,7 @@ public class CmPaymentServiceImpl extends BaseServiceImpl<CmPayment, Long> imple
 	private CmPaymentDao cmPaymentDao;
 
 	@Autowired
-	public void setBaseDao() {
+	public void setBaseDao(CmPaymentDao cmPaymentDao) {
 		super.setBaseDao(cmPaymentDao);
 	}
 
