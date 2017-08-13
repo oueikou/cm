@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50520
+Source Server Version : 50718
 Source Host           : localhost:3306
 Source Database       : cashier_manager
 
 Target Server Type    : MYSQL
-Target Server Version : 50520
+Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-06-28 17:28:08
+Date: 2017-08-06 22:11:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -84,11 +84,15 @@ CREATE TABLE `cm_order` (
   `order_status` tinyint(2) DEFAULT NULL COMMENT '订单状态：0-未下单或下单失败；1-已下单，未支付；2-交易已完成；3-订单已取消',
   `order_cost` decimal(10,2) DEFAULT NULL COMMENT '订单总成本',
   `order_amount` decimal(10,2) DEFAULT NULL COMMENT '订单总金额',
+  `service_ticket_id` bigint(20) DEFAULT NULL COMMENT '服务票号',
   `create_user` bigint(20) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modify_user` bigint(20) DEFAULT NULL COMMENT '修改人',
   `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_order_sn` (`order_sn`) USING BTREE COMMENT '订单编号唯一约束',
+  KEY `fk_order_service_ticket` (`service_ticket_id`),
+  CONSTRAINT `fk_order_service_ticket` FOREIGN KEY (`service_ticket_id`) REFERENCES `cm_service_ticket` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 -- ----------------------------
@@ -114,8 +118,8 @@ CREATE TABLE `cm_order_item` (
   PRIMARY KEY (`id`),
   KEY `fk_order_item_food` (`food_id`),
   KEY `fk_order_item_order` (`order_id`),
-  CONSTRAINT `fk_order_item_order` FOREIGN KEY (`order_id`) REFERENCES `cm_order` (`id`),
-  CONSTRAINT `fk_order_item_food` FOREIGN KEY (`food_id`) REFERENCES `cm_food` (`id`)
+  CONSTRAINT `fk_order_item_food` FOREIGN KEY (`food_id`) REFERENCES `cm_food` (`id`),
+  CONSTRAINT `fk_order_item_order` FOREIGN KEY (`order_id`) REFERENCES `cm_order` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单项表';
 
 -- ----------------------------
@@ -127,7 +131,7 @@ CREATE TABLE `cm_order_item` (
 -- ----------------------------
 DROP TABLE IF EXISTS `cm_payment`;
 CREATE TABLE `cm_payment` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `payment_sn` varchar(50) DEFAULT NULL COMMENT '支付编号',
   `payment_amount` decimal(10,2) DEFAULT NULL COMMENT '支付金额',
   `payment_method` tinyint(2) DEFAULT NULL COMMENT '支付方式：0-现金支付；1-支付宝支付；2-微信支付；3-银联卡支付',
@@ -144,6 +148,26 @@ CREATE TABLE `cm_payment` (
 
 -- ----------------------------
 -- Records of cm_payment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cm_service_ticket
+-- ----------------------------
+DROP TABLE IF EXISTS `cm_service_ticket`;
+CREATE TABLE `cm_service_ticket` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `service_ticket_no` varchar(10) NOT NULL COMMENT '服务票号',
+  `service_ticket_status` int(1) DEFAULT NULL COMMENT '状态：0-未使用（票未使用或已回收）；1-已使用',
+  `create_user` bigint(20) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modify_user` bigint(20) DEFAULT NULL COMMENT '修改人',
+  `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_service_ticket_no` (`service_ticket_no`) USING BTREE COMMENT '票号唯一约束'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务票表';
+
+-- ----------------------------
+-- Records of cm_service_ticket
 -- ----------------------------
 
 -- ----------------------------

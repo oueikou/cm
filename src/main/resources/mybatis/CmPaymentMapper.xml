@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.dao.CmPaymentDao">
+  <resultMap id="BaseResultMap" type="com.cm.entity.CmPayment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="payment_sn" jdbcType="VARCHAR" property="paymentSn" />
+    <result column="payment_amount" jdbcType="DECIMAL" property="paymentAmount" />
+    <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
+    <result column="payment_status" jdbcType="TINYINT" property="paymentStatus" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_user" jdbcType="BIGINT" property="modifyUser" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, payment_sn, payment_amount, payment_method, payment_status, order_id, create_user, 
+    create_time, modify_user, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_payment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cm_payment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cm.entity.CmPayment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cm_payment (payment_sn, payment_amount, payment_method, 
+      payment_status, order_id, create_user, 
+      create_time, modify_user, modify_time
+      )
+    values (#{paymentSn,jdbcType=VARCHAR}, #{paymentAmount,jdbcType=DECIMAL}, #{paymentMethod,jdbcType=TINYINT}, 
+      #{paymentStatus,jdbcType=TINYINT}, #{orderId,jdbcType=BIGINT}, #{createUser,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cm.entity.CmPayment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cm_payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paymentSn != null">
+        payment_sn,
+      </if>
+      <if test="paymentAmount != null">
+        payment_amount,
+      </if>
+      <if test="paymentMethod != null">
+        payment_method,
+      </if>
+      <if test="paymentStatus != null">
+        payment_status,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyUser != null">
+        modify_user,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paymentSn != null">
+        #{paymentSn,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null">
+        #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentMethod != null">
+        #{paymentMethod,jdbcType=TINYINT},
+      </if>
+      <if test="paymentStatus != null">
+        #{paymentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cm.entity.CmPayment">
+    update cm_payment
+    <set>
+      <if test="paymentSn != null">
+        payment_sn = #{paymentSn,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null">
+        payment_amount = #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentMethod != null">
+        payment_method = #{paymentMethod,jdbcType=TINYINT},
+      </if>
+      <if test="paymentStatus != null">
+        payment_status = #{paymentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null">
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cm.entity.CmPayment">
+    update cm_payment
+    set payment_sn = #{paymentSn,jdbcType=VARCHAR},
+      payment_amount = #{paymentAmount,jdbcType=DECIMAL},
+      payment_method = #{paymentMethod,jdbcType=TINYINT},
+      payment_status = #{paymentStatus,jdbcType=TINYINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

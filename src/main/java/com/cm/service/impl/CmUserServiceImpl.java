@@ -23,7 +23,7 @@ public class CmUserServiceImpl extends BaseServiceImpl<CmUser, Long> implements 
 	private CmUserDao cmUserDao;
 	
 	@Autowired
-	public void setBaseDao() {
+	public void setBaseDao(CmUserDao cmUserDao) {
 		super.setBaseDao(cmUserDao);
 	}
 

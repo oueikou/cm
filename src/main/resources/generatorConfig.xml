@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
   <!-- 数据库驱动包位置，此处根据驱动包实际路径配置 -->
-  <classPathEntry location="D:\mvn_repository\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar" />
+  <classPathEntry location="/home/yongheng/.m2/repository/mysql/mysql-connector-java/5.1.42/mysql-connector-java-5.1.42.jar" />
   
   <context id="context1">
   
@@ -21,17 +21,82 @@
     </javaTypeResolver>
     
     <!-- 生成实体类路径 -->
-    <javaModelGenerator targetPackage="com.cm.entity" targetProject="cashier-manager\src\main\java" />
+    <javaModelGenerator targetPackage="com.cm.entity" targetProject="cm/src/main/java" />
     
     <!-- 生成mapxml路径 -->
-    <sqlMapGenerator targetPackage="mybatis" targetProject="cashier-manager/src/main/resources" />
+    <sqlMapGenerator targetPackage="mybatis" targetProject="cm/src/main/resources" />
     
     <!-- 生成dao接口路径 -->
-    <javaClientGenerator targetPackage="com.cm.dao" targetProject="cashier-manager/src/main/java" type="XMLMAPPER" />
+    <javaClientGenerator targetPackage="com.cm.dao" targetProject="cm/src/main/java" type="XMLMAPPER" />
     
     <!-- 配置表信息 -->
     <!-- tableName表名，domainObjectName实体类名 -->
-    <table tableName="cm_user" domainObjectName="CmUser" 
+    <table tableName="cm_category" domainObjectName="CmCategory" 
+      enableSelectByExample="false"
+      enableDeleteByExample="false"
+      enableCountByExample="false" 
+      selectByExampleQueryId="false"
+      enableUpdateByExample="false">
+      <!-- 指定列的java数据类型 -->
+      <generatedKey column="id" sqlStatement="MySql" identity="true" />
+<!--       <columnOverride column="id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+      <!-- 如果有多个字段，可以继续增加 -->
+<!--       <columnOverride column="condo_building_id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+	</table>
+	
+	<table tableName="cm_food" domainObjectName="CmFood" 
+      enableSelectByExample="false"
+      enableDeleteByExample="false"
+      enableCountByExample="false" 
+      selectByExampleQueryId="false"
+      enableUpdateByExample="false">
+      <!-- 指定列的java数据类型 -->
+      <generatedKey column="id" sqlStatement="MySql" identity="true" />
+<!--       <columnOverride column="id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+      <!-- 如果有多个字段，可以继续增加 -->
+<!--       <columnOverride column="condo_building_id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+	</table>
+	
+	<table tableName="cm_order" domainObjectName="CmOrder" 
+      enableSelectByExample="false"
+      enableDeleteByExample="false"
+      enableCountByExample="false" 
+      selectByExampleQueryId="false"
+      enableUpdateByExample="false">
+      <!-- 指定列的java数据类型 -->
+      <generatedKey column="id" sqlStatement="MySql" identity="true" />
+<!--       <columnOverride column="id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+      <!-- 如果有多个字段，可以继续增加 -->
+<!--       <columnOverride column="condo_building_id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+	</table>
+	
+	<table tableName="cm_order_item" domainObjectName="CmOrderItem" 
+      enableSelectByExample="false"
+      enableDeleteByExample="false"
+      enableCountByExample="false" 
+      selectByExampleQueryId="false"
+      enableUpdateByExample="false">
+      <!-- 指定列的java数据类型 -->
+      <generatedKey column="id" sqlStatement="MySql" identity="true" />
+<!--       <columnOverride column="id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+      <!-- 如果有多个字段，可以继续增加 -->
+<!--       <columnOverride column="condo_building_id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+	</table>
+	
+	<table tableName="cm_payment" domainObjectName="CmPayment" 
+      enableSelectByExample="false"
+      enableDeleteByExample="false"
+      enableCountByExample="false" 
+      selectByExampleQueryId="false"
+      enableUpdateByExample="false">
+      <!-- 指定列的java数据类型 -->
+      <generatedKey column="id" sqlStatement="MySql" identity="true" />
+<!--       <columnOverride column="id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+      <!-- 如果有多个字段，可以继续增加 -->
+<!--       <columnOverride column="condo_building_id" jdbcType="OTHER" javaType="java.util.UUID" typeHandler="UUIDTypeHandler"/> -->
+	</table>
+	
+	<table tableName="cm_service_ticket" domainObjectName="CmServiceTicket" 
       enableSelectByExample="false"
       enableDeleteByExample="false"
       enableCountByExample="false" 

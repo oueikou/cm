@@ -30,7 +30,7 @@ public class ExampleController extends BaseController {
 
 	@RequestMapping("/test")
 	public String test(Page<CmUser> page) {
-		// cmUserService.suUser();
+//		cmUserService.suUser();
 		CmUser u = cmUserService.selectByPrimaryKey(2L);
 		logger.debug("----loginName: " + u.getLoginName());
 
@@ -43,7 +43,7 @@ public class ExampleController extends BaseController {
 
 	}
 	
-	@RequestMapping("/testInser")
+	@RequestMapping("/testInsert")
 	public CmUser testUserInsert(CmUser cmUser){
 		cmUserService.insert(cmUser);
 		return cmUser;
